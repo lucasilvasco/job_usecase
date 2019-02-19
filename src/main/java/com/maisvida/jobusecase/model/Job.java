@@ -13,10 +13,10 @@ public class Job {
 	private String name;
 	private boolean active;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Job parentJob;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Task> tasks;
 	
 	public long getId() {
