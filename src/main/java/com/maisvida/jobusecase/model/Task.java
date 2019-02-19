@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 
 @Entity
-@Table
 public class Task {
 	
 	@Id

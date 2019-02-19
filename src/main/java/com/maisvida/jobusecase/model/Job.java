@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Job {
 	
 	@Id
@@ -13,9 +12,11 @@ public class Job {
 	private long id;
 	private String name;
 	private boolean active;
+	
+	@ManyToOne
 	private Job parentJob;
 	
-	@ManyToMany
+	@OneToMany
 	private List<Task> tasks;
 	
 	public long getId() {
