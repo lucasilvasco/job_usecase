@@ -1,4 +1,4 @@
-package com.maisvida.JobUseCase;
+package com.maisvida.jobusecase;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
