@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,26 +28,31 @@ public class JobController {
 	private JobService jobService;
 	
 	@GetMapping
+	@CrossOrigin(origins="*")
 	public List<Job> listar() {
 		return jobService.getAllJobs();
 	}
 	
 	@GetMapping("/{id}")
+	@CrossOrigin(origins="*")
 	public Optional<Job> jobForId(@PathVariable Long id) {
 		return jobService.getJobForId(id);
 	}
 	
 	@PostMapping
+	@CrossOrigin(origins="*")
 	public HttpStatus addJob(@RequestBody Job job) {
 		return jobService.addJob(job);
 	}
 	
 	@DeleteMapping
+	@CrossOrigin(origins="*")
 	public HttpStatus removeJob(@RequestBody Job job) {
 		return jobService.removeJob(job);
 	}
 	
 	@PutMapping
+	@CrossOrigin(origins="*")
 	public HttpStatus updateJob(@RequestBody Job job) {
 		return jobService.updateJob(job);
 	}
