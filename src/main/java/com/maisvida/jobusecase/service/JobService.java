@@ -35,7 +35,7 @@ public class JobService {
 				Job parentJob = jobRepository.getOne(job.getParentJob().getId());
 				newJob.setParentJob(parentJob);
 			} else {
-				newJob.setParentJob(job.getParentJob());
+				newJob.setParentJob(null);
 			}
 			
 			newJob.setName(job.getName());
