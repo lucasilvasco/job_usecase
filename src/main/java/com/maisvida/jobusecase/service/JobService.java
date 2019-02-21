@@ -23,10 +23,14 @@ public class JobService {
 		return jobRepository.findAll();
 	}
 	
+	public List<Job> getJobForQuery(String query) {
+		return jobRepository.findByNameContaining(query);
+	}
+	
 	public Optional<Job> getJobForId(Long id) {
 		return jobRepository.findById(id);
 	}
-
+	
 	public HttpStatus addJob(Job job) {
 		try {
 			Job newJob = new Job();			
@@ -61,8 +65,19 @@ public class JobService {
 	public HttpStatus updateJob(Job job) {
 		try {
 			Job jobToUpdate = jobRepository.getOne(job.getId());
+
+			if(job.getParentJob() != null && job.getId() == job.getParentJob().getId()) {
+				throw new Exception("Auto dependencia!");
+			}
+			
+			if(job.getParentJob() != null && jobRepository.existsById(job.getParentJob().getId())) {
+				Job parentJob = jobRepository.getOne(job.getParentJob().getId());
+				jobToUpdate.setParentJob(parentJob);
+			} else {
+				jobToUpdate.setParentJob(null);
+			}
+				
 			jobToUpdate.setName(job.getName());
-			jobToUpdate.setParentJob(job.getParentJob());
 			jobToUpdate.setTasks(job.getTasks());
 			jobToUpdate.setActive(job.isActive());
 			

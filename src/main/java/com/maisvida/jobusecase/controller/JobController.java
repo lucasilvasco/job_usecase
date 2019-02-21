@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maisvida.jobusecase.model.Job;
@@ -27,13 +28,16 @@ public class JobController {
 	@Autowired
 	private JobService jobService;
 	
-	@GetMapping
+	@GetMapping(params = "q")
 	@CrossOrigin(origins="*")
-	public List<Job> listar() {
-		return jobService.getAllJobs();
+	public List<Job> listar(@RequestParam("q") String query) {
+		if(query.equals("")) {
+			return jobService.getAllJobs();
+		}
+		return jobService.getJobForQuery(query);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	@CrossOrigin(origins="*")
 	public Optional<Job> jobForId(@PathVariable Long id) {
 		return jobService.getJobForId(id);
