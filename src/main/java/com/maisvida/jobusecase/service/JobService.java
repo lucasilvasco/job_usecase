@@ -2,17 +2,16 @@ package com.maisvida.jobusecase.service;
 
 import com.maisvida.jobusecase.model.Job;
 import com.maisvida.jobusecase.repository.JobRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class JobService {
 
-    @Autowired
     private JobRepository jobRepository;
 
     public List<Job> getAllJobs() {
@@ -49,8 +48,7 @@ public class JobService {
     }
 
     public Job updateJob(Job job) {
-        Job jobToUpdate = jobRepository.findById(job.getId())
-                .orElseThrow(RuntimeException::new);
+        Job jobToUpdate = getJobForId(job.getId());
 
 		verificarAutoDependencia(job);
 

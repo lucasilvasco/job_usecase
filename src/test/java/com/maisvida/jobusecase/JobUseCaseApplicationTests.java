@@ -1,4 +1,4 @@
-package com.maisvida.JobUseCase;
+package com.maisvida.jobusecase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
